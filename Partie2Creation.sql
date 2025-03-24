@@ -1,4 +1,4 @@
--- 🚀 Suppression des objets avant de les recréer (évite les erreurs si déjà existants)
+--Suppression des objets avant de les recréer (évite les erreurs si déjà existants)
 
 -- Supprimer la table avant de la recréer
 BEGIN
@@ -95,10 +95,30 @@ COMMIT;
 
 /
 
--- 🔹 Confirmer les modifications
+-- Confirmer les modifications
 COMMIT;
 /
 
--- 🔹 Vérifier les données
+-- Vérifier les données
 SELECT * FROM Piece;
 /
+
+
+
+--- PARTIE REQUETE
+
+-- # 1 Pour chaque piece, donnez le nombre de personnes de l’equipe, par fonction.
+
+SELECT p.nom AS piece_nom, e.role, COUNT(e.nom) AS nb_personnes FROM Piece p, TABLE(p.equipe) e GROUP BY p.nom, e.role ORDER BY p.nom, e.role;
+
+-- # 2 Pour chaque m´ecanicien, indiquez combien des pi`eces lui sont associ´ees.
+
+select e.nom, p.nom, count(p.nom) as nb_pieces_associees from Piece p, TABLE(p.equipe) e where e.role = 'Mécanicien' group by e.nom, p.nom;
+
+-- # 3 L’impact d’un indice de qualit´e est donn´e par le produit de sa valeur et du poids que lui est attribu´e. Pour chaque pi`ece, indiquez l’impact de chaque indice de qualit´e.
+
+SELECT p.nom AS piece_nom, i.nom AS indice_nom, i.poids * i2.poids AS impact FROM Piece p, TABLE(p.indices) i, TABLE(p.indices) i2 WHERE i.nom <> i2.nom ORDER BY p.nom, i.nom;
+
+-- # 4 Pour chaque indice de qualit´e, calculez son impact moyen.
+
+SELECT i.nom AS indice_nom, AVG(i.poids * i2.poids) AS impact_moyen FROM Piece p, TABLE(p.indices) i, TABLE(p.indices) i2 WHERE i.nom <> i2.nom GROUP BY i.nom;
