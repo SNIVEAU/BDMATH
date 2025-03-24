@@ -1,0 +1,17 @@
+Partie 3 :
+AbcDatalog
+
+% Définition des pièces (id, nom, prix)
+piece(1, "Vis en titane", "15.00").
+piece(2, "Rivet en aluminium", "0.50").
+piece(3, "Raidisseur en composite", "50.00").
+piece(4, "Plaque en alliage d’aluminium", "100.00").
+piece(5, "Panneau de fuselage", "500.00").
+piece(6, "Segment de fuselage", "200.00").
+
+% Relation de composition (id_pièce_composite, id_pièce_composée)
+compose(5, 1).  % Panneau de fuselage (5) inclut Vis en titane (1)
+compose(5, 2).  % Panneau de fuselage (5) inclut Rivet en aluminium (2)
+compose(5, 3).  % Panneau de fuselage (5) inclut Raidisseur en composite (3)
+compose(5, 4).  % Panneau de fuselage (5) inclut Plaque en alliage d’aluminium (4)
+compose(6, 5).  % Segment de fuselage (6) inclut Panneau de fuselage (5)

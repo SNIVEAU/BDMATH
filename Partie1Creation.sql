@@ -45,11 +45,7 @@ INSERT INTO COMPOSE (id_piece_composite, id_piece_composees, detail_assemblage) 
 SELECT nom_piece 
 FROM PIECE 
 NATURAL JOIN COMPOSE
-WHERE id_piece_composees = id_piece_composite
-
-
-
-
+WHERE id_piece_composees = id_piece_composite;
 
 CREATE VIEW vue_pieces_composees AS
 SELECT DISTINCT p.id_piece, p.nom_piece, p.prix_unitaire, p.description
